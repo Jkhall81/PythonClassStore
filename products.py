@@ -19,6 +19,16 @@ class Product:
             print(f'An error occurred: {str(e)}')
             raise e
 
+    _promotion = None
+
+    @property
+    def promotion(self):
+        return self._promotion
+
+    @promotion.setter
+    def promotion(self, value):
+        self._promotion = value
+
     def get_quantity(self):
         output = float(self.quantity)
         return output

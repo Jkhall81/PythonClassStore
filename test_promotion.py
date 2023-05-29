@@ -54,4 +54,18 @@ def test_percent_discount_total_price():
 	assert total_price == 22.95
 
 
+# Testing getter and setter!
+def test_promotion_getter_and_setter():
+	product = Product('name', 10, 20)
+	promotion = PercentDiscount(30)
+
+	assert product.promotion is None  # Initial value should be None
+
+	product.promotion = promotion
+	assert product.promotion == promotion  # Getter should return the set promotion
+
+	product.promotion = None
+	assert product.promotion is None  # Setter should allow setting promotion to None
+
+
 pytest.main()
