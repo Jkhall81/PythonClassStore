@@ -61,3 +61,13 @@ class NonStockedProduct(Product):
     def show(self):
         output = f'{self.name}, Price: {self.price}, Quantity: Unlimited'
         return output
+
+
+class LimitedProduct(Product):
+    def __init__(self, name, price, quantity, maximum):
+        super().__init__(name, price, quantity)
+        self.maximum = maximum
+
+    def show(self):
+        output = f'{self.name}, Price: {self.price}, Quantity: {self.quantity} Maximum: {self.maximum}'
+        return output

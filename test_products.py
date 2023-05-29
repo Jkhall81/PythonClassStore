@@ -1,6 +1,7 @@
 import pytest
 from products import Product
 from products import NonStockedProduct
+from products import LimitedProduct
 
 
 # Unit Tests for the Product class!
@@ -54,6 +55,15 @@ def test_set_quantity_zero_deactivates_product():
 def test_quantity_is_zero():
 	p = NonStockedProduct('SomeShitName', 20)
 	assert p.quantity == 0
+
+
+# Unit Tests for the LimitedProduct class!
+# pass in (name, price, quantity, maximum)
+def test_maximum_is_correct():
+	p = LimitedProduct('name', 10, 10, 1)
+	assert p.maximum == 1
+	p1 = LimitedProduct('name', 10, 10, 2)
+	assert p1.maximum == 2
 
 
 pytest.main()
