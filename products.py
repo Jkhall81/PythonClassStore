@@ -15,6 +15,14 @@ class Product:
 
             self.active = True
 
+        except ValueError as e:
+            if isinstance(self, NonStockedProduct):
+                self.quantity = 0
+                self.active = True
+            else:
+                print(f'An error occurred: {str(e)}')
+                raise e
+
         except Exception as e:
             print(f'An error occurred: {str(e)}')
             raise e
@@ -75,6 +83,7 @@ class NonStockedProduct(Product):
         except ValueError:
             self.quantity = 0
         self.active = True
+
 
     def show(self):
         output = f'{self.name}, Price: {self.price}, Quantity: Unlimited'
