@@ -57,6 +57,7 @@ class NonStockedProduct(Product):
             super().__init__(name, price, 0)
         except ValueError:
             self.quantity = 0
+        self.active = True
 
     def show(self):
         output = f'{self.name}, Price: {self.price}, Quantity: Unlimited'
@@ -67,6 +68,7 @@ class LimitedProduct(Product):
     def __init__(self, name, price, quantity, maximum):
         super().__init__(name, price, quantity)
         self.maximum = maximum
+        self.active = True
 
     def show(self):
         output = f'{self.name}, Price: {self.price}, Quantity: {self.quantity} Maximum: {self.maximum}'
