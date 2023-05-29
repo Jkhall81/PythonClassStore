@@ -49,3 +49,15 @@ class Product:
         self.quantity -= quantity
         total_price = self.price * quantity
         return float(total_price)
+
+
+class NonStockedProduct(Product):
+    def __init__(self, name, price):
+        try:
+            super().__init__(name, price, 0)
+        except ValueError:
+            self.quantity = 0
+
+    def show(self):
+        output = f'{self.name}, Price: {self.price}, Quantity: Unlimited'
+        return output
