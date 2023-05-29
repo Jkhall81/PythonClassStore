@@ -49,6 +49,8 @@ class Product:
 
     def show(self):
         output = f'{self.name}, Price: {self.price}, Quantity: {self.quantity}'
+        if self.promotion is not None:
+            output += f', Promotion: {self.promotion.name}'
         return output
 
     def buy(self, quantity):
@@ -56,8 +58,13 @@ class Product:
             raise Exception('Quantity must be greater than zero!')
         if quantity > self.quantity:
             raise ValueError('Insufficient quantity available!')
+
+        if self.promotion is not None:
+            total_price = self.promotion.apply_promotion(self, quantity)
+        else:
+            total_price = self.price * quantity
+
         self.quantity -= quantity
-        total_price = self.price * quantity
         return float(total_price)
 
 

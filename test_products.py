@@ -2,6 +2,8 @@ import pytest
 from products import Product
 from products import NonStockedProduct
 from products import LimitedProduct
+from promotion import PercentDiscount
+from promotion import ThirdOneFree
 
 
 # Unit Tests for the Product class!
@@ -64,6 +66,39 @@ def test_maximum_is_correct():
 	assert p.maximum == 1
 	p1 = LimitedProduct('name', 10, 10, 2)
 	assert p1.maximum == 2
+
+
+# Testing updated show method!
+def test_show_method_with_promotion():
+	p = Product('Example Product', 10, 20)
+	promotion = PercentDiscount(10)
+	p.promotion = promotion
+	expected_output = 'Example Product, Price: 10, Quantity: 20, Promotion: Percent Discount!'
+	assert p.show() == expected_output
+	p1 = Product('name', 10, 20)
+	promotion = ThirdOneFree()
+	p1.promotion = promotion
+	expected_output2 = 'name, Price: 10, Quantity: 20, Promotion: Third One Free!'
+	assert p1.show() == expected_output2
+
+
+# Testing updated buy method!  Should be using apply_promotion if promotion is set!  let's get nashty....
+def test_buy_with_promotion():
+	product = Product('Product', 10, 20)
+	promotion = PercentDiscount(10)
+	product.promotion = promotion
+	total_price = product.buy(10)
+	# some quick maths.... 10% off 10 is 9 for qty 10 is 90
+	assert total_price == 90
+	# fucking shit works....  Muahaahaaahaaaahaaa
+
+
+def test_buy_without_promotion():
+	product = Product('Product', 10, 20)
+	total_price = product.buy(10)
+	# we're looking at an even hundo
+	assert total_price == 100
+	# Boomshakalaka
 
 
 pytest.main()
